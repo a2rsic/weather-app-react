@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import '../App.css';
-import { SearchLocation } from './SearchLocation';
+import { SearchLocation } from './searchLocation/SearchLocation';
 import { Header } from './common/Header';
 
 
