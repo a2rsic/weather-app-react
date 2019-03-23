@@ -15,7 +15,7 @@ class App extends Component {
         <Header />
         <Switch>
           <Route exact path="/" component={SearchLocation} />
-          <Route path="/location" component={LocationForecast} />
+          <Route path="/location/:id" component={LocationForecast} />
         </Switch>
       </div>
     );
