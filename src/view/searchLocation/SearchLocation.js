@@ -37,19 +37,9 @@ class SearchLocation extends Component {
         }
     }
 
-    // handleFilter = (searchInput) => {
-    //     console.log("input", searchInput);
-    //     const filteredLocations = this.state.locations.filter(location => {
-    //         return location.name.toLowerCase().includes(searchInput.toLowerCase())
-    //     })
-    //     this.setState({
-    //         filteredLocations
-    //     })
-    // }
-
     displayLocations = (locations) => {
         const locationList = locations.map((location, key) => {
-            return <Link to={`/location/${location.id}`} key={location.id}><li>{location.name}</li></Link>
+            return <Link to={`/location/${location.id}`} className="search-link" key={location.id}><li className="location-list">{location.name}</li></Link>
         })
         return locationList;
     }
