@@ -3,14 +3,12 @@ import { Link } from "react-router-dom";
 import * as locationService from "../../service/locationService";
 
 import "./SearchLocation.css"
-// import { SearchBar } from "../common/SearchBar";
 
 class SearchLocation extends Component {
     constructor(props) {
         super(props)
         this.state = {
             locations: [],
-            filteredLocations: [],
             searchInput: ""
         }
     }
@@ -21,7 +19,6 @@ class SearchLocation extends Component {
                 console.log("res", locations)
                 this.setState({
                     locations,
-                    filteredLocations: locations
                 })
             })
     }
@@ -40,29 +37,25 @@ class SearchLocation extends Component {
         }
     }
 
-    handleFilter = (searchInput) => {
-        console.log("input", searchInput);
-        const filteredLocations = this.state.locations.filter(location => {
-            return location.name.toLowerCase().includes(searchInput.toLowerCase())
-        })
-        this.setState({
-            filteredLocations
-        })
-    }
-
-    // componentDidMount() {
-    //     this.fetchSearchLocation()
+    // handleFilter = (searchInput) => {
+    //     console.log("input", searchInput);
+    //     const filteredLocations = this.state.locations.filter(location => {
+    //         return location.name.toLowerCase().includes(searchInput.toLowerCase())
+    //     })
+    //     this.setState({
+    //         filteredLocations
+    //     })
     // }
 
     displayLocations = (locations) => {
         const locationList = locations.map((location, key) => {
-            return <Link to="/location/" key={location.id}><li>{location.name}</li></Link>
+            return <Link to={`/location/${location.id}`} key={location.id}><li>{location.name}</li></Link>
         })
         return locationList;
     }
 
     render() {
-        const { filteredLocations } = this.state;
+        const { locations } = this.state;
         return (
             <div className="container">
                 <div className="container-weather-image">
@@ -72,7 +65,7 @@ class SearchLocation extends Component {
                     <input onChange={this.handleChangeSearchInput} value={this.state.searchInput} type="text" id="search-input"
                         placeholder="Search city" autoComplete="off" />
                     <ul className="search-list">
-                        {this.displayLocations(filteredLocations)}
+                        {this.displayLocations(locations)}
                     </ul>
                 </div>
             </div >
