@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+
 import * as locationService from "../../service/locationService";
+import weather from "../images/weather-icon.png";
 
 import "./SearchLocation.css"
 
@@ -16,7 +18,6 @@ class SearchLocation extends Component {
     fetchSearchLocation = (input) => {
         locationService.fetchLocation(input)
             .then(locations => {
-                console.log("res", locations)
                 this.setState({
                     locations,
                 })
@@ -25,6 +26,7 @@ class SearchLocation extends Component {
 
     handleChangeSearchInput = (e) => {
         const input = e.target.value;
+
         if (input) {
             this.fetchSearchLocation(input)
             this.setState({
@@ -47,9 +49,9 @@ class SearchLocation extends Component {
     render() {
         const { locations } = this.state;
         return (
-            <div className="container">
+            <div className="container-search-location">
                 <div className="container-weather-image">
-                    <img src="https://www.aweathermoment.com/resources/img/weather-icons/cloudy2.png" alt="weather" className="weather-image" />
+                    <img src={weather} alt="weather" className="weather-image" />
                 </div>
                 <div className="search-container">
                     <input onChange={this.handleChangeSearchInput} value={this.state.searchInput} type="text" id="search-input"

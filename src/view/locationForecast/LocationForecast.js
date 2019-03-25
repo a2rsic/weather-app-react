@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 
 import "./locationForecast.css";
+import goBack from "../images/goBack.png"
 import * as forecastService from "../../service/forecastService";
 import { LocationForecastItem } from "./locationForecastItem";
 
@@ -16,7 +17,6 @@ class LocationForecast extends Component {
         const { id } = this.props.match.params;
         forecastService.fetchForecast(id)
             .then(location => {
-                console.log("loc", location);
                 this.setState({
                     location
                 })
@@ -28,8 +28,12 @@ class LocationForecast extends Component {
         if (location.weather) {
             return location.weather.map((date, key) => {
                 return <LocationForecastItem key={date.id} weather={date} />
-            })
+            }).slice(0, 3)
         }
+    }
+
+    changePage = () => {
+        this.props.history.goBack()
     }
 
     render() {
@@ -38,7 +42,7 @@ class LocationForecast extends Component {
             <div className="location-forecast-container">
                 <div className="header">
                     <button className="back-button">
-                        <img className="back-image" src="https://cdn3.iconfinder.com/data/icons/user-interface-4-1/32/164-128.png" alt="weather" />
+                        <img onClick={this.changePage} className="back-image" src={goBack} alt="weather" />
                     </button>
                     <h2 className="forecast-city"><span className="city-name">{location.name}</span> Forecast</h2>
                     <div></div>

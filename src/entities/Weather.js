@@ -10,7 +10,7 @@ class Weather {
         this.weatherName = weather_state_name;
     }
 
-    getImgUrl = () => {
+    get imgUrl() {
         return `https://www.metaweather.com/static/img/weather/${this.image}.svg`
 
     }
